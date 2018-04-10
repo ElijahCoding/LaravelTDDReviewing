@@ -25,4 +25,11 @@ class ThreadTest extends TestCase
 
       $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->thread->replies);
     }
+
+    /** @test */
+    public function a_thread_has_a_creator()
+    {
+      $thread = create('App\Thread');
+      $this->assertInstanceOf('App\User', $thread->creator);
+    }
 }
