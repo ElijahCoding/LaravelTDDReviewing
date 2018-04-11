@@ -20,8 +20,7 @@ class ThreadTest extends TestCase
     /** @test */
     public function a_thread_has_many_replies()
     {
-      $thread = create('App\Thread');
-      $reply = create('App\Reply', ['thread_id' => $thread->id]);
+      $reply = create('App\Reply', ['thread_id' => $this->thread->id]);
 
       $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $this->thread->replies);
     }
@@ -29,7 +28,16 @@ class ThreadTest extends TestCase
     /** @test */
     public function a_thread_has_a_creator()
     {
-      $thread = create('App\Thread');
-      $this->assertInstanceOf('App\User', $thread->creator);
+      $this->assertInstanceOf('App\User', $this->thread->creator);
+    }
+
+    /** @test */
+    public function a_thread_can_add_a_reply()
+    {
+        $this->thread->addReply([
+            'body' => 'Foobar',
+            'user_id' => 1
+        ]);
+        $this->assertCount(1, $this->thread->replies);
     }
 }
