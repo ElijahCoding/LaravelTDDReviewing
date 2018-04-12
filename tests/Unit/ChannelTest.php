@@ -16,5 +16,6 @@ class ChannelTest extends TestCase
       $thread = create('App\Thread', ['channel_id' => $channel->id]);
 
       $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $channel->threads);
+      $this->assertTrue($channel->threads->contains($thread));
     }
 }
