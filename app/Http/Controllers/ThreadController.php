@@ -68,7 +68,10 @@ class ThreadController extends Controller
      */
     public function show($channel, Thread $thread)
     {
-        return view('threads.show', compact('thread'));
+        return view('threads.show', [
+          'thread' => $thread,
+          'replies' => $thread->replies()->paginate(1)
+        ]);
     }
 
     /**
@@ -112,7 +115,7 @@ class ThreadController extends Controller
       if ($channel->exists) {
         $threads->where('channel_id', $channel->id);
       }
-      
+
       return $threads->get();
     }
 }
