@@ -24,6 +24,8 @@ class FavoritesTest extends TestCase
     /** @test */
     public function an_authenticated_user_can_favorite_any_reply()
     {
+        $this->signIn();
+        
         $reply = create('App\Reply'); // automatically generating a thread . Read ModelFactory.php
 
         $this->post('replies/' . $reply->id . '/favorites');

@@ -12,12 +12,12 @@ class FavoriteController extends Controller
     {
       return $this->middleware(['auth']);
     }
-    
+
     public function store(Request $request, Reply $reply)
     {
-      return DB::table('favorites')->insert([
+       DB::table('favorites')->insert([
         'user_id' => auth()->id(),
-        'favorite_id' => $reply->id,
+        'favorited_id' => $reply->id,
         'favorited_type' => get_class($reply)
       ]);
     }
