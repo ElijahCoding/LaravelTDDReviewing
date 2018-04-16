@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Cache;
 use View;
 use App\Channel;
 use Illuminate\Support\ServiceProvider;
@@ -17,7 +18,11 @@ class AppServiceProvider extends ServiceProvider
     {
         // View::share('channels', Channel::all());
         View::composer(['threads.create', 'layouts.app'], function($view) {
-          $view->with('channels', Channel::all());
+          $channels = Cache::rememberForever('channels', function() {
+            return Channel::all();
+          });
+
+          $view->with('channels', $channels);
         });
     }
 
