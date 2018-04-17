@@ -17,4 +17,12 @@ class UserTest extends TestCase
 
         $this->assertTrue($user->threads->contains($thread));
     }
+
+    /** @test */
+    public function a_user_has_many_activities()
+    {
+      $user = create('App\User');
+
+      $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $user->activity);
+    }
 }
