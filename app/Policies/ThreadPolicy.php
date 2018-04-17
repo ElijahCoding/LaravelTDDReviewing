@@ -10,6 +10,13 @@ class ThreadPolicy
 {
     use HandlesAuthorization;
 
+    // public function before($user)
+    // {
+    //   if ($user->name === 'elijah') {
+    //     return true;
+    //   }
+    // }
+
     public function update(User $user, Thread $thread)
     {
       return $thread->user_id == $user->id;
