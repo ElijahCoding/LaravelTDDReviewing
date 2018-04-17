@@ -26,9 +26,9 @@ class Thread extends Model
         $thread->replies()->delete();
       });
 
-      static::created(function ($thread) {
-        $thread->recordActivity('created');
-      });
+      // static::created(function ($thread) {
+      //   $thread->recordActivity('created');
+      // });
     }
 
 
