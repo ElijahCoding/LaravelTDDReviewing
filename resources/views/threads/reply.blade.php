@@ -1,4 +1,4 @@
-<reply :attributes="{{ $reply }}" inline-template>
+<reply :attributes="{{ $reply }}" inline-template v-cloak>
   <div class="panel panel-default" id="reply-{{ $reply->id }}">
       <div class="panel-heading">
           <div class="level">
@@ -30,8 +30,8 @@
           <button class="btn btn-xs btn-link" @click="editing = false">Cancel</button>
         </div>
 
-        <div v-else>
-          {{ $reply->body }}
+        <div v-else v-text="body">
+          {{-- {{ $reply->body }} --}}
         </div>
       </div>
 

@@ -43642,6 +43642,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.patch('/replies/' + this.attributes.id, {
         body: this.body
       });
+
+      this.editing = false;
+
+      flash('Updated!');
     }
   }
 });
@@ -43651,7 +43655,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(33)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 58 */,
