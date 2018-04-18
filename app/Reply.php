@@ -14,6 +14,8 @@ class Reply extends Model
 
     protected $with = ['owner', 'favorites'];
 
+    protected $appends = ['favoritesCount'];
+
     public static function boot()
     {
       parent::boot();
