@@ -41,10 +41,12 @@ class FavoritesTest extends TestCase
 
         $reply = create('App\Reply'); // automatically generating a thread . Read ModelFactory.php
 
-        $this->post('replies/' . $reply->id . '/favorites');
+        $reply->favorite();
+        // $this->post('replies/' . $reply->id . '/favorites');
         $this->assertCount(1, $reply->favorites);
 
-        $this->delete('replies/' . $reply->id . '/favorites');
+        $reply->unfavorite();
+        // $this->delete('replies/' . $reply->id . '/favorites');
         $this->assertCount(0, $reply->fresh()->favorites);
     }
 

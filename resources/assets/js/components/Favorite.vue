@@ -12,26 +12,46 @@
     data () {
       return {
         count: this.reply.favoritesCount,
-        isFavorited: false
+        active: this.reply.isFavorited
       }
     },
 
     computed: {
       classes () {
-        return ['btn', this.isFavorited ? 'btn-primary' : 'btn-default']
+        return ['btn', this.active ? 'btn-primary' : 'btn-default']
+      },
+
+      endpoint() {
+        return '/replies/' + this.reply.id + '/favorites'
       }
     },
 
     methods: {
       toggle () {
-        if (this.isFavorited) {
-          axios.delete('/replies/' + this.reply.id + '/favorites')
-        } else {
-          axios.post('/replies/' + this.reply.id + '/favorites')
+         this.active ? this.destroy() : this.create()
+        // if (this.isFavorited) {
+        //
+        //   this.destroy()
+        //
+        // } else {
+        //
+        //   this.create()
+        //
+        // }
+      },
 
-          this.isFavorited = true
-          this.count++
-        }
+      create() {
+        axios.post(this.endpoint)
+
+        this.active = true
+        this.count++
+      },
+
+      destroy() {
+        axios.delete(this.endpoint)
+
+        this.active = false
+        this.count--
       }
     }
   }

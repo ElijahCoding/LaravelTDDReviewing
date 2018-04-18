@@ -43719,27 +43719,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       count: this.reply.favoritesCount,
-      isFavorited: false
+      active: this.reply.isFavorited
     };
   },
 
 
   computed: {
     classes: function classes() {
-      return ['btn', this.isFavorited ? 'btn-primary' : 'btn-default'];
+      return ['btn', this.active ? 'btn-primary' : 'btn-default'];
+    },
+    endpoint: function endpoint() {
+      return '/replies/' + this.reply.id + '/favorites';
     }
   },
 
   methods: {
     toggle: function toggle() {
-      if (this.isFavorited) {
-        axios.delete('/replies/' + this.reply.id + '/favorites');
-      } else {
-        axios.post('/replies/' + this.reply.id + '/favorites');
+      this.active ? this.destroy() : this.create();
+      // if (this.isFavorited) {
+      //
+      //   this.destroy()
+      //
+      // } else {
+      //
+      //   this.create()
+      //
+      // }
+    },
+    create: function create() {
+      axios.post(this.endpoint);
 
-        this.isFavorited = true;
-        this.count++;
-      }
+      this.active = true;
+      this.count++;
+    },
+    destroy: function destroy() {
+      axios.delete(this.endpoint);
+
+      this.active = false;
+      this.count--;
     }
   }
 });
