@@ -30,6 +30,7 @@
           axios.post('/replies/' + this.reply.id + '/favorites')
 
           this.isFavorited = true
+          this.count++
         }
       }
     }
