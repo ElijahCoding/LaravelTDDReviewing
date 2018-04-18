@@ -1856,23 +1856,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['message'],
+    props: ['message'],
 
-  data: function data() {
-    return {
-      body: this.message,
-      show: false
-    };
-  },
-  created: function created() {
-    if (this.message) {
-      this.body = this.message;
-      this.show = true;
+    data: function data() {
+        return {
+            body: '',
+            show: false
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        if (this.message) {
+            this.flash(this.message);
+        }
+
+        window.events.$on('flash', function (message) {
+            return _this.flash(message);
+        });
+    },
+
+
+    methods: {
+        flash: function flash(message) {
+            this.body = message;
+            this.show = true;
+
+            this.hide();
+        },
+        hide: function hide() {
+            var _this2 = this;
+
+            setTimeout(function () {
+                _this2.show = false;
+            }, 3000);
+        }
     }
-  },
-
-
-  methods: {}
 });
 
 /***/ }),
@@ -1899,6 +1918,7 @@ try {
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
+window.Vue = __webpack_require__(45);
 
 window.axios = __webpack_require__(11);
 
@@ -1917,6 +1937,12 @@ if (token) {
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+window.events = new Vue();
+
+window.flash = function (message) {
+  window.events.$emit('flash', message);
+};
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
