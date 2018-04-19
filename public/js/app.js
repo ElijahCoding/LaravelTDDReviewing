@@ -43705,6 +43705,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     destroy: function destroy() {
       axios.delete('/replies/' + this.data.id);
 
+      this.$emit('deleted', this.data.id);
+
       $(this.$el).fadeOut(300, function () {
         flash('Your reply has been deleted.');
       });
@@ -43717,7 +43719,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(33)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 58 */
@@ -43984,6 +43986,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       items: this.data
     };
+  },
+
+
+  methods: {
+    remove: function remove(index) {
+      this.items.splice(index, 1);
+
+      flash('Reply was deleted');
+    }
   }
 });
 
@@ -44026,10 +44037,15 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', _vm._l((_vm.items), function(reply) {
+  return _c('div', _vm._l((_vm.items), function(reply, index) {
     return _c('div', [_c('reply', {
       attrs: {
         "data": reply
+      },
+      on: {
+        "deleted": function($event) {
+          _vm.remove(index)
+        }
       }
     })], 1)
   }))
