@@ -8,11 +8,9 @@
                   </a> said {{ data.created_at }}...
                 </h5>
 
-                <!-- @if (Auth::check())
-                  <div>
-                      <favorite :reply="{{ $reply }}"></favorite>
+                  <div v-if="signedIn">
+                      <favorite :reply="data"></favorite>
                   </div>
-                @endif -->
             </div>
         </div>
 
@@ -31,13 +29,10 @@
           </div>
         </div>
 
-        <!-- @can ('update', $reply) -->
-            <div class="panel-footer level">
-
+            <div class="panel-footer level" v-if="canUpdate">
                 <button class="btn btn-xs mr-1" @click="editing = true">Edit</button>
                 <button class="btn btn-xs btn-danger mr-1" @click="destroy">Delete</button>
             </div>
-        <!-- @endcan -->
     </div>
 
 </template>
@@ -57,6 +52,17 @@
         editing: false,
         id: this.data.id,
         body: this.data.body
+      }
+    },
+
+    computed: {
+      signedIn () {
+        return window.App.signedIn
+      },
+
+      canUpdate () {
+      return this.authorize(user => this.data.user_id == user.id)
+        // return this.data.user_id = window.App.user.id
       }
     },
 

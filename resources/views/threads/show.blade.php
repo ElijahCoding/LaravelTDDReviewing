@@ -28,8 +28,8 @@
                         {{ $thread->body }}
                     </div>
                 </div>
-
-                <replies :data="{{ $thread->replies }}" @removed="repliesCount--"></replies>
+                {{-- can-update="{{ Auth::user()->can('update', $thread) }}" --}}
+                <replies :data="{{ $thread->replies }}" @removed="repliesCount--" ></replies>
 
                 {{-- @foreach ($replies as $reply)
                     @include ('threads.reply')
