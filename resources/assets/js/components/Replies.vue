@@ -26,6 +26,8 @@
       remove (index) {
         this.items.splice(index, 1)
 
+        this.$emit('removed')
+        
         flash('Reply was deleted')
       }
     }
