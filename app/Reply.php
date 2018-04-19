@@ -16,14 +16,14 @@ class Reply extends Model
 
     protected $appends = ['favoritesCount', 'isFavorited'];
 
-    public static function boot()
-    {
-      parent::boot();
-
-      static::deleting(function($model) {
-        $model->favorites->each->delete();
-      });
-    }
+    // public static function boot()
+    // {
+    //   parent::boot();
+    //
+    //   static::deleting(function($model) {
+    //     $model->favorites->each->delete();
+    //   });
+    // }
 
     public function owner()
     {
