@@ -44070,8 +44070,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
+  props: ['initialRepliesCount'],
+
   components: {
     Replies: __WEBPACK_IMPORTED_MODULE_0__components_Replies_vue___default.a
+  },
+
+  data: function data() {
+    return {
+      repliesCount: this.initialRepliesCount
+    };
   }
 });
 
