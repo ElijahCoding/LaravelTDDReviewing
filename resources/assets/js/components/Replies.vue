@@ -22,13 +22,16 @@
 
     data () {
       return {
-        items: this.data
+        items: this.data,
+        endpoint: location.pathname + '/replies'
       }
     },
 
     methods: {
       add (reply) {
         this.items.push(reply)
+
+        this.$emit('added')
       },
 
       remove (index) {

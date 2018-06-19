@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div v-if="signedIn">
             <div class="form-group">
                 <textarea name="body"
                           id="body"
@@ -16,7 +16,7 @@
                     @click="addReply">Post</button>
         </div>
 
-        <p class="text-center">
+        <p class="text-center" v-else>
             Please <a href="/login">sign in</a> to participate in this
             discussion.
         </p>
