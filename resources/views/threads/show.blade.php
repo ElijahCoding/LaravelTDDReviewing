@@ -37,7 +37,7 @@
 
                 {{ $replies->links() }} --}}
 
-                @if (auth()->check())
+                {{-- @if (auth()->check())
                     <form method="POST" action="{{ $thread->path() . '/replies' }}">
                         {{ csrf_field() }}
 
@@ -51,7 +51,7 @@
                 @else
                     <p class="text-center">Please <a href="{{ route('login') }}">sign in</a> to participate in this
                         discussion.</p>
-                @endif
+                @endif --}}
             </div>
 
             <div class="col-md-4">
