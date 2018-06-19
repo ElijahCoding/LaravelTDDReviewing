@@ -25,10 +25,17 @@
 
 <script>
   export default {
+    props: ['endpoint'],
+
     data () {
       return {
-        body: '',
-        endpoint: ''
+        body: ''
+      }
+    },
+
+    computed: {
+      signedIn() {
+          return window.App.signedIn;
       }
     },
 
@@ -44,6 +51,7 @@
                this.$emit('created', response.data)
              })
       }
-    }
+    },
+
   }
 </script>

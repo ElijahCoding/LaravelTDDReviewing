@@ -13293,13 +13293,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['endpoint'],
+
   data: function data() {
     return {
-      body: '',
-      endpoint: ''
+      body: ''
     };
   },
 
+
+  computed: {
+    signedIn: function signedIn() {
+      return window.App.signedIn;
+    }
+  },
 
   methods: {
     addReply: function addReply() {
@@ -13315,6 +13322,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     }
   }
+
 });
 
 /***/ }),
@@ -13357,6 +13365,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
   methods: {
+    add: function add(reply) {
+      this.items.push(reply);
+    },
     remove: function remove(index) {
       this.items.splice(index, 1);
 
@@ -13529,7 +13540,10 @@ Vue.prototype.authorize = function (handler) {
 
 window.axios = __webpack_require__(15);
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common = {
+  'X-CSRF-TOKEN': window.App.csrfToken,
+  'X-Requested-With': 'XMLHttpRequest'
+};
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -44066,7 +44080,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     })], 1)
-  }), _vm._v(" "), _c('new-reply')], 2)
+  }), _vm._v(" "), _c('new-reply', {
+    attrs: {
+      "endpoint": _vm.endpoint
+    },
+    on: {
+      "created": _vm.add
+    }
+  })], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
